@@ -38,10 +38,8 @@ export default defineConfig(({mode}) => {
     console.log(apiServer + " current api server");
     console.log(wsServer + " current ws server");
 
-    return {
-        plugins: [
-            vue(),
-            vuetify({autoImport: true}),
+    // Only enable heavy plugins in build modes (prod/test), not in dev
+    const buildPlugins = (mode === 'prod' || mode === 'test') ? [
             compression({
                 algorithm: 'brotliCompress',
                 ext: '.br',
@@ -76,6 +74,13 @@ export default defineConfig(({mode}) => {
                     },
                 },
             })
+    ] : [];
+
+    return {
+        plugins: [
+            vue(),
+            vuetify({autoImport: true}),
+            ...buildPlugins,
         ],
         define:
             {
