@@ -15,7 +15,10 @@ import imageminPngquant from 'imagemin-pngquant'
 
 
 // https://vitejs.dev/config/
-export default defineConfig(({mode}) => {
+export default defineConfig({
+  base: '/hexlashgame/',
+})
+
 
     const apiServers = {
        prod: 'https://api.hexlash.com',
